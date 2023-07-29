@@ -49,7 +49,10 @@
     <div style="background:#efefef; color:#000; width:500px; margin: auto; margin-top:50px; padding: 50px;">
         <h2 style="  text-align: justify;  text-justify: inter-word;">Login</h2><br>
         <form id="loginform" action="#" method="post" autocomplete="off">
-          @csrf
+            @csrf
+            <input type="hidden" name="pid" value="{{ isset($pid) ? $pid : '' }}">
+            <input type="hidden" name="requestId" value="{{ isset($requestId) ? $requestId : '' }}">
+            <input type="hidden" name="isReturn" value="{{ isset($isReturn) ? $isReturn : '' }}">
             <label for="email">Email:</label><br>
             <input type="email" name="username" id="email" Placeholder="Email"><br>
             <label for="password">Password:</label><br>
@@ -83,6 +86,9 @@
                 <form id="loginform" action="#" method="post" autocomplete="off">
                     @csrf
                     <div class="input-group mb-3">
+                        {{-- <input type="hidden" name="pid"  value="{{isset($pid)?$pid:''}}">
+                        <input type="hidden" name="requestId"  value="{{isset($requestId)?$requestId:''}}">
+                        <input type="hidden" name="isReturn"  value="{{isset($isReturn)?$isReturn:''}}"> --}}
                         <input type="email" class="form-control" placeholder="UserName" required maxlength="100"
                             name="username" autocomplete="off">
                         <span class="error"></span>
@@ -237,7 +243,7 @@
             color: #ff0000;
         }
     </style>
-     @include('footer')
+    @include('footer')
 
 </body>
 

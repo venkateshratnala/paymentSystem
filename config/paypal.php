@@ -10,6 +10,11 @@ return array(
     'live_client_id' => env('PAYPAL_LIVE_CLIENT_ID', ''),
     'live_secret' => env('PAYPAL_LIVE_SECRET', ''),
 
+    'paypal_success_url' => env('PAYPAL_RETURN_URL', 'https://www.example.com/success.php'),
+    'paypal_cancel_url' => env('PAYPAL_CANCEL_URL', 'https://www.example.com/cancel.php'),
+    'paypal_notf_url' => env('PAYPAL_NOTIFY_URL', 'https://www.example.com/paypal_ipn.php'),
+    'paypal_currency' => env('CURRENCY', 'USD'),
+   
     
     /**
      * SDK configuration settings

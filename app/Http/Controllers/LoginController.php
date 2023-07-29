@@ -69,9 +69,18 @@ class LoginController extends Controller
         return response()->json($json_data, 200);
     }
 
-    public function loginPage()
+    public function loginPage(Request $request)
     {
-        return view('login');
+
+        // $request()->has('ref')    $request->query();
+   
+        $data = [];
+        if (isset($request->isReturn) && $request->has('isReturn')) {
+            $data['pid'] = $request->pid;
+            $data['isReturn'] = $request->isReturn;
+            $data['requestId'] = $request->requestId;
+        }
+        return view('login', $data);
     }
 
     public function signupPage()
@@ -88,7 +97,7 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login');
     }
-    public function postLogin()
+    public function postLogin(Request $request)
     {
         $cred = request()->validate([
             'username' => 'required',
@@ -104,8 +113,11 @@ class LoginController extends Controller
             $last_login = $user->l_loggin;
             Session::put('last_login', $last_login);
             DB::table('users')->where('id', $user->id)->update(['l_loggin' => date('Y-m-d H:i:s')]);
-
             $redirect = '/profile';
+            if ($request->has('pid')) {
+                $redirect = '/payment?pid=' . $request->pid;
+            }
+
             $response = array('status' => true, 'redirect' => $redirect);
             echo json_encode($response);
         } else {

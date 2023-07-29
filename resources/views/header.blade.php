@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ url('profile') }}">My Account</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="product.php">Membership</a>
+                <a class="nav-link" href="{{ url('products') }}">Membership</a>
             </li>
             <?php $user = auth()->user(); ?>
             @if ($user)
